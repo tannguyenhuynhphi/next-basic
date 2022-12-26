@@ -23,7 +23,7 @@ function handler(req, res) {
       return;
     }
     try {
-      const users = await getAllDocuments(client, Schema.USERS, { _id: -1 },0 ,10);
+      const users = await getAllDocuments(client, Schema.USERS, { _id: -1 },0 ,20);
       const response = users.map((user) => {
         const { password, ...userWithoutPassword } = user;
         return userWithoutPassword;

@@ -1,5 +1,8 @@
-a { cursor: pointer; }
-
-.app-container {
-    min-height: 350px;
+a {
+  cursor: pointer;
+}
+body {
+  background-color: #ffffff;
+  font-family: Georgia, serif;
+  margin:0px;
 }

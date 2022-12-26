@@ -9,6 +9,7 @@
     },
     "dependencies": {
         "@hookform/resolvers": "^2.6.1",
+        "antd": "^5.1.0",
         "bcryptjs": "^2.4.3",
         "eslint-config-next": "^13.0.7",
         "express-jwt": "^6.0.0",
@@ -24,6 +25,7 @@
         "react-dom": "^18.2.0",
         "react-hook-form": "^7.12.1",
         "rxjs": "^7.3.0",
+        "sass": "^1.57.1",
         "yup": "^0.32.9"
     }
 }
