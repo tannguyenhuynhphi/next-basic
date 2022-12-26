@@ -25,7 +25,8 @@ function Navigation() {
 
   const menu = [
     { key: 1, label: "Home" },
-    { key: 2, label: "Logout" },
+    { key: 2, label: "Page" },
+    { key: 3, label: "Logout" },
   ];
   const onClick = (info) => {
     console.log("info", info);
@@ -33,6 +34,8 @@ function Navigation() {
       case "1":
         return router.push("/");
       case "2":
+        return router.push("/page-list");
+      case "3":
         return logout();
       default:
         return null;

@@ -2,54 +2,63 @@ import { Table } from "antd";
 import FormatDatetime from "helpers/formatDatetime";
 import { useState, useEffect } from "react";
 
-import { userService } from "services";
+import { postService } from "services";
 
-export default Home;
-
-function Home() {
+function PageList() {
   const [users, setUsers] = useState(null);
 
   useEffect(() => {
-    userService.getAll().then((x) => setUsers(x));
+    postService.getPost().then((x) => setUsers(x));
   }, []);
   const columns = [
     {
-      title: "Email",
+      title: "title",
       width: 100,
-      dataIndex: "email",
-      key: "email",
+      dataIndex: "title",
+      key: "title",
       fixed: "left",
     },
     {
-      title: "address",
-      width: 100,
-      dataIndex: "address",
-      key: "address",
+      title: "content",
+      width: 500 ,
+      dataIndex: "content",
+      key: "content",
       fixed: "left",
     },
     {
-      title: "role",
-      dataIndex: "role",
-      key: "role",
+      title: "image",
+      dataIndex: "image",
+      key: "image",
       width: 150,
     },
-
+    {
+      title: "location",
+      dataIndex: "location",
+      key: "location",
+      width: 150,
+    },
     {
       title: "create",
       dataIndex: "create",
       key: "create",
       width: 150,
-      render: (create) => {
-        return <p>{FormatDatetime(create)}</p>;
+    },
+    {
+      title: "dateCreated",
+      dataIndex: "dateCreated",
+      key: "dateCreated",
+      width: 150,
+      render: (dateCreated) => {
+        return <p>{FormatDatetime(dateCreated)}</p>;
       },
     },
     {
-      title: "update",
-      dataIndex: "update",
-      key: "update",
+      title: "dateUpdate",
+      dataIndex: "dateUpdate",
+      key: "dateUpdate",
       width: 150,
-      render: (update) => {
-        return <p>{FormatDatetime(update)}</p>;
+      render: (dateUpdate) => {
+        return <p>{FormatDatetime(dateUpdate)}</p>;
       },
     },
     {
@@ -93,12 +102,13 @@ function Home() {
     //       },
     //     });
     //   }}
-    //   scroll={
-    //     {
-    //       //   x: 1500,
-    //       //   y: 300,
-    //     }
-    //   }
+      scroll={
+        {
+            x: 2000,
+          //   y: 300,
+        }
+      }
     />
   );
 }
+export default PageList;
