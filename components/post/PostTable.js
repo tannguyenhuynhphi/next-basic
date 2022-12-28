@@ -1,5 +1,9 @@
-import { ExportOutlined } from "@ant-design/icons";
-import { Button, Input, Select } from "antd";
+import {
+  CheckCircleOutlined,
+  CloseCircleOutlined,
+  ExportOutlined,
+} from "@ant-design/icons";
+import { Button, Input, Select, Tag } from "antd";
 import FormatDatetime from "helpers/formatDatetime";
 import { useState, useEffect, lazy, useRef } from "react";
 import { postService } from "services";
@@ -14,7 +18,7 @@ function PostTable() {
   // const [load, setLoad] = useState(false);
   const [filter, setFilter] = useState({});
   const inputRefTitle = useRef(null);
-  
+
   useEffect(() => {
     var page = 1;
     var limit = 10;
@@ -103,7 +107,19 @@ function PostTable() {
       width: 150,
       sorter: true,
       render: (active) => {
-        return <p>{active ? "true" : "false"}</p>;
+        return (
+          <p>
+            {active ? (
+              <Tag icon={<CheckCircleOutlined />} color="success">
+                Hoạt Động
+              </Tag>
+            ) : (
+              <Tag icon={<CloseCircleOutlined />} color="error">
+                Đã tắt
+              </Tag>
+            )}
+          </p>
+        );
       },
     },
   ];
@@ -116,10 +132,10 @@ function PostTable() {
       title: inputRefTitle.current.input.value,
     });
   };
-  const changeSelect =(value)=>{
-    filter.active=value?value:""
-    setFilter(filter)
-  }
+  const changeSelect = (value) => {
+    filter.active = value ? value : "";
+    setFilter(filter);
+  };
   return (
     <ProTable
       rowSelection={{
@@ -157,9 +173,6 @@ function PostTable() {
             },
           ]}
         />,
-        // <Input ref={inputRef} type="text" id="title" name="title" placeholder="Title" />,
-        // <Input ref={inputRef} type="text" id="title" name="title" placeholder="Title" />,
-
         <Button type="primary" key="primary" onClick={search}>
           Tìm kiếm
         </Button>,
