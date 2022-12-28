@@ -1,4 +1,8 @@
-import { connectToDatabase, getAllDocuments } from "data/database";
+import {
+  connectToDatabase,
+  countDocuments,
+  getAllDocuments,
+} from "data/database";
 import { Schema } from "data/Schema";
 import { apiHandler } from "helpers/api";
 import { ObjectId } from "mongodb";
@@ -19,6 +23,29 @@ function handler(req, res) {
   }
   //get
   async function getPost() {
+    var pages = 0;
+    var limits = 10;
+    var sorters = { _id: -1 };
+    var filter = {}
+    if (req.query.page) {
+      pages = parseInt(req.query.page);
+    }
+    if (req.query.limit) {
+      limits = parseInt(req.query.limit);
+    }
+    if (req.query.column) {
+      var column = req.query.column;
+      var order = req.query.order;
+      sorters = JSON.parse(`{"${column}":${order}}`);
+    }
+    if (req.query.title) {
+       filter.title ={ $regex: req.query.title }
+    }
+    if (req.query.active) {
+      filter.active = req.query.active==="true"?true:false
+   }
+    //     filter = { "title": { $regex: "bài " }, image: "public/image" }
+    console.log('filter',filter)
     let client;
     try {
       client = await connectToDatabase();
@@ -30,12 +57,17 @@ function handler(req, res) {
       const posts = await getAllDocuments(
         client,
         Schema.POSTS,
-        { _id: -1 },
-        0,
-        10
+        filter,
+        sorters,
+        pages,
+        limits
       );
+      const resp = {
+        data: posts,
+        total: Object.entries(filter).length === 0?await countDocuments(client, Schema.POSTS):posts.length,
+      };
       client.close();
-      return res.status(200).json(posts);
+      return res.status(200).json(resp);
     } catch (error) {
       client.close();
       res.status(500).json({ message: "Getting event failed." });
@@ -50,34 +82,6 @@ function handler(req, res) {
       });
       return;
     }
-
-    // function makeid(length) {
-    //   var result = "";
-    //   var characters =
-    //     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-    //   var charactersLength = characters.length;
-    //   for (var i = 0; i < length; i++) {
-    //     result += characters.charAt(
-    //       Math.floor(Math.random() * charactersLength)
-    //     );
-    //   }
-    //   return result;
-    // }
-    // for (var i = 0; i < 100; i++) {
-    //   const client = await connectToDatabase();
-    //   const db = client.db();
-    //   const post = {
-    //     title: title+makeid(100),
-    //     content: content+makeid(1000),
-    //     location: location,
-    //     image: image+makeid(10),
-    //     active: true,
-    //     create: create,
-    //     dateCreated: new Date(Date.now()).toISOString(),
-    //     dateUpdate: new Date(Date.now()).toISOString(),
-    //   };
-    //   await db.collection(Schema.POSTS).insertOne(post);
-    // }
 
     const client = await connectToDatabase();
     const db = client.db();

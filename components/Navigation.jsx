@@ -47,7 +47,7 @@ function Navigation() {
       <Menu
         theme="light"
         mode="horizontal"
-        defaultSelectedKeys={["1"]}
+        // defaultSelectedKeys={["2"]}
         items={menu}
         onClick={onClick}
       />

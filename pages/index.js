@@ -63,7 +63,6 @@ function Home() {
     },
   ];
 
-
   return (
     <Table
       columns={columns}
@@ -72,33 +71,33 @@ function Home() {
         defaultPageSize: 10,
         showSizeChanger: true,
         pageSizeOptions: ["5", "10", "15"],
-        total: 20
+        total: 20,
       }}
 
-    //   pagination={{
-    //     pageSizeOptions: [1, 2, 10],
-    //     total: state.total,
-    //     pageSize: state.query.limit || 10,
-    //     current: parseInt(state.query.page),
-    //     showQuickJumper: true,
-    //     showSizeChanger: true,
-    //   }}
-    //   onChange={({ current, pageSize }, filter, sorter: any, extra) => {
-    //     updateQuery({
-    //       page: current,
-    //       limit: pageSize,
-    //       sorter: {
-    //         column: sorter.field,
-    //         order: sorter.order,
-    //       },
-    //     });
-    //   }}
-    //   scroll={
-    //     {
-    //       //   x: 1500,
-    //       //   y: 300,
-    //     }
-    //   }
+      //   pagination={{
+      //     pageSizeOptions: [1, 2, 10],
+      //     total: state.total,
+      //     pageSize: state.query.limit || 10,
+      //     current: parseInt(state.query.page),
+      //     showQuickJumper: true,
+      //     showSizeChanger: true,
+      //   }}
+      //   onChange={({ current, pageSize }, filter, sorter: any, extra) => {
+      //     updateQuery({
+      //       page: current,
+      //       limit: pageSize,
+      //       sorter: {
+      //         column: sorter.field,
+      //         order: sorter.order,
+      //       },
+      //     });
+      //   }}
+      //   scroll={
+      //     {
+      //       //   x: 1500,
+      //       //   y: 300,
+      //     }
+      //   }
     />
   );
 }

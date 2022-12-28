@@ -7,8 +7,7 @@ import { userService } from "services";
 import { Navigation } from "components";
 import { AppContextProvider } from "store/app-context";
 import { NotificationAction } from "components/notification/notificationAction";
-
-export default App;
+import { ConfigProvider } from "antd";
 
 function App({ Component, pageProps }) {
   const router = useRouter();
@@ -49,13 +48,16 @@ function App({ Component, pageProps }) {
   return (
     <>
       <AppContextProvider>
+      <ConfigProvider locale={{locale:'vi'}}>
         <Head>
           <title>Basic</title>
         </Head>
         <Navigation />
-        <NotificationAction/>
+        <NotificationAction />
         <div>{authorized && <Component {...pageProps} />}</div>
+        </ConfigProvider>
       </AppContextProvider>
     </>
   );
 }
+export default App;

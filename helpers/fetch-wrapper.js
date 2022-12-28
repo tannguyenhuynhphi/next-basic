@@ -11,10 +11,12 @@ export const fetchWrapper = {
     delete: _delete
 };
 
-function get(url) {
+function get(url,body) {
     const requestOptions = {
         method: 'GET',
-        headers: authHeader(url)
+        headers: authHeader(url),
+        // credentials: 'include',
+        body: JSON.stringify(body)
     };
     return fetch(url, requestOptions).then(handleResponse);
 }
