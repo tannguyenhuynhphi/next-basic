@@ -36,17 +36,6 @@ function handler(req, res) {
         message: "Files have been uploaded.",
       });
 
-      // console.log(req.file);
-
-      // if (req.file == undefined) {
-      //   return res.send({
-      //     message: "You must select a file.",
-      //   });
-      // }
-
-      // return res.send({
-      //   message: "File has been uploaded.",
-      // });
     } catch (error) {
       console.log(error);
 

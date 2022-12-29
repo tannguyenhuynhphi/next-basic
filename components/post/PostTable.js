@@ -2,22 +2,32 @@ import {
   CheckCircleOutlined,
   CloseCircleOutlined,
   ExportOutlined,
+  SearchOutlined,
 } from "@ant-design/icons";
 import { Button, Input, Select, Tag } from "antd";
-import FormatDatetime from "helpers/formatDatetime";
+import { FormatDatetime, FormatRangePicker } from "helpers/formatDatetime";
 import { useState, useEffect, lazy, useRef } from "react";
 import { postService } from "services";
+import { DatePicker, Space } from "antd";
+import { useTranslation } from "react-i18next";
+
 const ProTable = lazy(() => import("@ant-design/pro-table"));
 
 function PostTable() {
+  const { t } = useTranslation();
   const [data, setData] = useState(null);
   const [total, setTotal] = useState(null);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(10);
   const [sorter, setSorter] = useState(null);
+  const [range, setRange] = useState(null);
   // const [load, setLoad] = useState(false);
   const [filter, setFilter] = useState({});
   const inputRefTitle = useRef(null);
+  //RangePicker
+
+  const { RangePicker } = DatePicker;
+  const state = { startDate: new Date(), endDate: "" };
 
   useEffect(() => {
     var page = 1;
@@ -136,6 +146,14 @@ function PostTable() {
     filter.active = value ? value : "";
     setFilter(filter);
   };
+
+  const handleChangeDebut = (range) => {
+    const startDateValue = FormatRangePicker(range ? range[0].format() : "");
+    const endDateValue = FormatRangePicker(range ? range[1].format() : "");
+    setRange([startDateValue, endDateValue]);
+    filter.ranges = range ? [startDateValue, endDateValue] : "";
+    setFilter(filter);
+  };
   return (
     <ProTable
       rowSelection={{
@@ -143,7 +161,7 @@ function PostTable() {
         columnTitle: false,
       }}
       search={false}
-      headerTitle="PAGE LIST "
+      headerTitle={t("page.post.title","POST LIST")}
       columns={columns}
       onReset={onReset}
       dataSource={data}
@@ -154,7 +172,17 @@ function PostTable() {
           type="text"
           id="title"
           name="title"
+          allowClear
           placeholder="Title"
+        />,
+        <RangePicker
+          // allowClear={true}
+          // bordered={true}
+          onChange={handleChangeDebut}
+          // value={range}
+          // defaultValue={ }
+          // defaultValue ={}
+          format={"DD-MM-YYYY"}
         />,
         <Select
           id="select"
@@ -173,7 +201,12 @@ function PostTable() {
             },
           ]}
         />,
-        <Button type="primary" key="primary" onClick={search}>
+        <Button
+          icon={<SearchOutlined />}
+          type="primary"
+          key="primary"
+          onClick={search}
+        >
           Tìm kiếm
         </Button>,
         <Button icon={<ExportOutlined />}>xuất</Button>,

@@ -9,6 +9,8 @@ import { AppContextProvider } from "store/app-context";
 import { NotificationAction } from "components/notification/notificationAction";
 import { ConfigProvider } from "antd";
 
+import { I18nextProvider } from "react-i18next";
+import i18n from "translation/i18n";
 function App({ Component, pageProps }) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
@@ -47,16 +49,19 @@ function App({ Component, pageProps }) {
   }
   return (
     <>
-      <AppContextProvider>
-      <ConfigProvider locale={{locale:'vi'}}>
-        <Head>
-          <title>Basic</title>
-        </Head>
-        <Navigation />
-        <NotificationAction />
-        <div>{authorized && <Component {...pageProps} />}</div>
-        </ConfigProvider>
-      </AppContextProvider>
+      {" "}
+      <I18nextProvider i18n={i18n}>
+        <AppContextProvider>
+          <ConfigProvider locale={{ locale: "vi" }}>
+            <Head>
+              <title>Basic</title>
+            </Head>
+            <Navigation />
+            <NotificationAction />
+            <div>{authorized && <Component {...pageProps} />}</div>
+          </ConfigProvider>
+        </AppContextProvider>
+      </I18nextProvider>
     </>
   );
 }

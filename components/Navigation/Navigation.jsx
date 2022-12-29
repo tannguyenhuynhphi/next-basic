@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-
-import { NavLink } from ".";
 import { userService } from "services";
-import { Breadcrumb, Layout, Menu, theme } from "antd";
+import { Breadcrumb, Col, Layout, Menu, Row, theme } from "antd";
 import { useRouter } from "next/router";
+import Logo from "./logo";
+import LeftNavi from "./rightNavi";
 const { Header, Content, Footer } = Layout;
 
 export { Navigation };
@@ -15,18 +15,12 @@ function Navigation() {
     const subscription = userService.user.subscribe((x) => setUser(x));
     return () => subscription.unsubscribe();
   }, []);
-
-  function logout() {
-    userService.logout();
-  }
-
   // only show nav when logged in
   if (!user) return null;
 
   const menu = [
     { key: 1, label: "Home" },
     { key: 2, label: "Page" },
-    { key: 3, label: "Logout" },
   ];
   const onClick = (info) => {
     console.log("info", info);
@@ -35,22 +29,29 @@ function Navigation() {
         return router.push("/");
       case "2":
         return router.push("/page-list");
-      case "3":
-        return logout();
       default:
         return null;
     }
   };
   return (
     <Header>
-      <div className="logo" />
-      <Menu
-        theme="light"
-        mode="horizontal"
-        // defaultSelectedKeys={["2"]}
-        items={menu}
-        onClick={onClick}
-      />
+      <Row>
+        <Col span={1}>
+          <Logo />
+        </Col>
+        <Col span={20}>
+          <Menu
+            theme="light"
+            mode="horizontal"
+            // defaultSelectedKeys={["2"]}
+            items={menu}
+            onClick={onClick}
+          />
+        </Col>
+        <Col span={3}>
+      <LeftNavi/>
+        </Col>
+      </Row>
     </Header>
   );
 }

@@ -5,6 +5,7 @@ import {
 } from "data/database";
 import { Schema } from "data/Schema";
 import { apiHandler } from "helpers/api";
+import { FormatToTimestamp } from "helpers/formatDatetime";
 import { ObjectId } from "mongodb";
 
 // users in JSON file for simplicity, store in a db for production applications
@@ -26,7 +27,7 @@ function handler(req, res) {
     var pages = 0;
     var limits = 10;
     var sorters = { _id: -1 };
-    var filter = {}
+    var filter = {};
     if (req.query.page) {
       pages = parseInt(req.query.page);
     }
@@ -39,13 +40,18 @@ function handler(req, res) {
       sorters = JSON.parse(`{"${column}":${order}}`);
     }
     if (req.query.title) {
-       filter.title ={ $regex: req.query.title }
+      filter.title = { $regex: req.query.title };
     }
     if (req.query.active) {
-      filter.active = req.query.active==="true"?true:false
-   }
-    //     filter = { "title": { $regex: "bài " }, image: "public/image" }
-    console.log('filter',filter)
+      filter.active = req.query.active === "true" ? true : false;
+    }
+    if (req.query.startDate && req.query.endDate) {
+      filter.dateCreated = {
+        $gte: FormatToTimestamp(req.query.startDate),
+        $lt: FormatToTimestamp(req.query.endDate) + 86399999,
+      };
+    }
+    console.log("filter", filter);
     let client;
     try {
       client = await connectToDatabase();
@@ -64,7 +70,10 @@ function handler(req, res) {
       );
       const resp = {
         data: posts,
-        total: Object.entries(filter).length === 0?await countDocuments(client, Schema.POSTS):posts.length,
+        total:
+          Object.entries(filter).length === 0
+            ? await countDocuments(client, Schema.POSTS)
+            : posts.length,
       };
       client.close();
       return res.status(200).json(resp);
@@ -92,8 +101,8 @@ function handler(req, res) {
       image: image,
       active: true,
       create: create,
-      dateCreated: new Date(Date.now()).toISOString(),
-      dateUpdate: new Date(Date.now()).toISOString(),
+      dateCreated: new Date().valueOf(),
+      dateUpdate: new Date().valueOf(),
     };
     await db.collection(Schema.POSTS).insertOne(post);
     res.status(201).json({ success: post });

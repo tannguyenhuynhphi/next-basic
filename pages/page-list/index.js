@@ -1,7 +1,4 @@
-// import { useState, useEffect, lazy } from "react";
-// import { postService } from "services";
 import PostTable from "components/post/PostTable";
-
 function PageList() {
   // const [users, setUsers] = useState(null);
   // useEffect(() => {

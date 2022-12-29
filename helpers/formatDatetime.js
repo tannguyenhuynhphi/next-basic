@@ -1,13 +1,18 @@
 const moment = require("moment");
 
-function FormatDatetime(date) { 
-const format1 = "DD-MM-YYYY HH:mm:ss"
-const format2 = "DD-MM-YYYY"
-// var date1 = new Date("2020-06-24 22:57:36");
-// var date2 = new Date();
-
-// dateTime1 = moment(date1).format(format1);
-var dateTime = moment(date).format(format1);
-    return dateTime
+export function FormatDatetime(date) {
+  const format = "DD-MM-YYYY HH:mm:ss";
+  var dateTime = moment(date).format(format);
+  return dateTime;
 }
-export default FormatDatetime;
+export function FormatRangePicker(date) {
+  const format = "DD-MM-YYYY";
+  var dateTime = moment(date).format(format);
+  return dateTime;
+}
+
+export function FormatToTimestamp(myDate) {
+  myDate = myDate.split("-");
+  var newDate = new Date(myDate[2], myDate[1] - 1, myDate[0]);
+  return newDate.getTime();
+}
