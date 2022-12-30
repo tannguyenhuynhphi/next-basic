@@ -1,8 +1,7 @@
 {
-    "content": {
-        "functional": "Functional",
-        "class": "Class",
-        "text": "This is text"
+  "page": {
+    "post": {
+      "title": "POST LIST"
     }
+  }
 }
-
