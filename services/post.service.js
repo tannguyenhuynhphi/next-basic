@@ -17,7 +17,6 @@ export const postService = {
   getPost,
 };
 function getPost(limit, page, sorter, filter) {
-  console.log("filter",filter)
   var baseUrls = baseUrl + "?limit=" + limit + "&page=" + page;
   if (sorter&&sorter.column) {
     baseUrls = baseUrls + converterSorter(sorter);

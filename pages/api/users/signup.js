@@ -5,7 +5,7 @@ import { apiHandler } from "helpers/api";
 import { connectToDatabase } from "data/database";
 import { hashPassword } from "helpers/auth";
 import { Schema } from "data/Schema";
-import { Role } from "services/role";
+import { Role } from "helpers/role";
 
 // users in JSON file for simplicity, store in a db for production application
 export default apiHandler(handler);
@@ -19,7 +19,7 @@ function handler(req, res) {
   }
 
   async function signup() {
-    const { email, password, role, address, phone, status, gender, dateBirth } =
+    const {name, email, password, role, address, phone, status, gender, dateBirth } =
       req.body;
     // if (!role) {
     //   role = Role.ADMIN;
@@ -78,6 +78,7 @@ function handler(req, res) {
     //     client.close();
     //   }
     await db.collection(Schema.USERS).insertOne({
+      name: name,
       email: email,
       password: hashedPassword,
       role: role,

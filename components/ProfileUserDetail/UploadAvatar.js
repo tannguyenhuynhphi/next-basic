@@ -1,7 +1,7 @@
 import { Button, message, Upload, Modal } from "antd";
 import { useTranslation } from "react-i18next";
 import { useState } from "react";
-import { InboxOutlined, UploadOutlined } from "@ant-design/icons";
+import { EditOutlined, InboxOutlined, UploadOutlined } from "@ant-design/icons";
 
 const { Dragger } = Upload;
 function UploadAvatar() {
@@ -37,7 +37,7 @@ function UploadAvatar() {
   };
   return (
     <>
-      <Button icon={<UploadOutlined />} onClick={showModal}>
+      <Button icon={<EditOutlined />} onClick={showModal}>
         Cập nhật ảnh đại diện
       </Button>
       <Modal

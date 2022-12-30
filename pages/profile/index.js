@@ -1,19 +1,15 @@
 import ProfileUserDetail from "components/ProfileUserDetail/ProfileUserDetail";
+import { useEffect, useState } from "react";
+import { userService } from "services";
 
 function Profile() {
-  // const [users, setUsers] = useState(null);
-  // useEffect(() => {
-  //   postService.getPost().then((x) => setUsers(x));
-  // }, []);
-  const data = {
-    name: "USRe name",
-    phone: "054821691",
-    email: "user@gmail.com",
-    gender: "nam",
-    address: "Đồng Tháp",
-    dateOfBirth: "20/02/1999",
-    cccd: "341959796",
-  };
+  const [data, setData] = useState({});
+  useEffect(() => {
+   const user = JSON.parse(localStorage.getItem("user"))
+    userService.getUser(user.id).then((x) => {
+      setData(x);
+    });
+  }, []);
   return (
     <>
       <ProfileUserDetail data={data} />

@@ -5,7 +5,7 @@ import { apiHandler } from "helpers/api";
 import { connectToDatabase } from "data/database";
 import { hashPassword, verifyPassword } from "helpers/auth";
 import { Schema } from "data/Schema";
-import { Role } from "services/role";
+import { Role } from "helpers/role";
 import { ObjectId } from "mongodb";
 
 // users in JSON file for simplicity, store in a db for production applications

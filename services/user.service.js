@@ -16,6 +16,7 @@ export const userService = {
   login,
   logout,
   getAll,
+  getUser
 };
 function login(email, password) {
   return fetchWrapper
@@ -37,4 +38,8 @@ function logout() {
 
 function getAll() {
   return fetchWrapper.get(baseUrl);
+}
+function getUser(id) {
+  var baseUrls = baseUrl + "?id=" + id
+  return fetchWrapper.get(baseUrls);
 }

@@ -24,6 +24,11 @@ function ProfileUserDetail(props) {
           extra={<a href="#">More</a>}
         >
           <Row>
+            <Col span={24}>
+              <UploadAvatar />
+            </Col>
+          </Row>
+          <Row>
             <Col span={12}>
               <div className={classes.avatar}>
                 <Avatar size={150} icon={<UserOutlined />} />
@@ -53,6 +58,22 @@ function ProfileUserDetail(props) {
                   <Text>{props.data.phone}</Text>
                 </div>
                 <div className={classes.content}>
+                  <ManOutlined />
+                  <Title className={classes.title} level={5}>
+                    {t("page.profile.gender", "Giới tính:")}
+                  </Title>
+                  <Text>{props.data.gender}</Text>
+                </div>
+              </Col>
+              <Col span={6}>
+                <div className={classes.content}>
+                  <CarryOutOutlined />
+                  <Title className={classes.title} level={5}>
+                    {t("page.profile.date_of_birth", "Ngày sinh:")}
+                  </Title>
+                  <Text>{props.data.dateBirth}</Text>
+                </div>
+                <div className={classes.content}>
                   <EnvironmentOutlined />
                   <Title className={classes.title} level={5}>
                     {t("page.profile.address", "Địa chỉ:")}
@@ -60,45 +81,10 @@ function ProfileUserDetail(props) {
                   <Text>{props.data.address}</Text>
                 </div>
               </Col>
-              <Col span={6}>
-                <div className={classes.content}>
-                  <ManOutlined />
-                  <Title className={classes.title} level={5}>
-                    {t("page.profile.gender", "Giới tính:")}
-                  </Title>
-                  <Text>{props.data.gender}</Text>
-                </div>
-                <div className={classes.content}>
-                  <CarryOutOutlined />
-                  <Title className={classes.title} level={5}>
-                    {t("page.profile.date_of_birth", "Ngày sinh:")}
-                  </Title>
-                  <Text>{props.data.dateOfBirth}</Text>
-                </div>
-                <div className={classes.content}>
-                  <CreditCardOutlined />
-                  <Title className={classes.title} level={5}>
-                    {t("page.profile.CMND_CCCD", "CMND_CCCD:")}
-                  </Title>
-                  <Text>{props.data.cccd}</Text>
-                </div>
-              </Col>
-            </Col>
-          </Row>
-          <Row>
-            <Col span={24}>
-              <UploadAvatar /> 
             </Col>
           </Row>
         </Card>
       </Col>
-      {/* <Col span={12}>
-        <Card title="Default size card" extra={<a href="#">More</a>}>
-          <p>Card content</p>
-          <p>Card content</p>
-          <p>Card content</p>
-        </Card>
-      </Col> */}
     </Row>
   );
 }
