@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import { userService } from "services";
 import { Breadcrumb, Col, Layout, Menu, Row, theme } from "antd";
 import { useRouter } from "next/router";
-import Logo from "./logo";
-import LeftNavi from "./rightNavi";
+import Logo from "./Logo";
+import LeftNavi from "./RightNavi";
 const { Header, Content, Footer } = Layout;
 
 export { Navigation };

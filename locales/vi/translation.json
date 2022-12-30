@@ -1,7 +1,23 @@
 {
+  "navigation": {
+    "avatar": {
+      "logout": "Đăng xuất",
+      "profile": "Hồ sơ"
+    }
+  },
   "page": {
     "post": {
       "title": "Danh sách"
+    },
+    "profile": {
+      "CMND_CCCD": "CMND_CCCD:",
+      "address": "Địa chỉ:",
+      "date_of_birth": "Ngày sinh:",
+      "email": "Email:",
+      "gender": "Giới tính:",
+      "name": "Họ Tên:",
+      "phone": "Số điện thoại:",
+      "title": "Thông tin"
     }
   }
 }

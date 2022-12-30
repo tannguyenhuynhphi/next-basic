@@ -1,5 +1,5 @@
 import { AppleOutlined } from "@ant-design/icons";
-import classes from "./logo.module.scss";
+import classes from "./Logo.module.scss";
 
 function Logo() {
   return (

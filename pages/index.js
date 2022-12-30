@@ -1,4 +1,5 @@
 import { Carousel, Table } from "antd";
+import LiveShow from "components/Home/LiveShow";
 import FormatDatetime from "helpers/formatDatetime";
 import { useState, useEffect } from "react";
 
@@ -7,13 +8,6 @@ import { userService } from "services";
 export default Home;
 
 function Home() {
-  const contentStyle = {
-    height: '160px',
-    color: '#fff',
-    lineHeight: '160px',
-    textAlign: 'center',
-    background: '#364d79',
-  };
   // const [users, setUsers] = useState(null);
 
   // useEffect(() => {
@@ -106,19 +100,20 @@ function Home() {
     //     }
     //   }
     // />
-    <Carousel autoplay>
-      <div>
-        <h3 style={contentStyle}>1</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>2</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>3</h3>
-      </div>
-      <div>
-        <h3 style={contentStyle}>4</h3>
-      </div>
-    </Carousel>
+    // <Carousel autoplay>
+    //   <div>
+    //     <h3 style={contentStyle}>1</h3>
+    //   </div>
+    //   <div>
+    //     <h3 style={contentStyle}>2</h3>
+    //   </div>
+    //   <div>
+    //     <h3 style={contentStyle}>3</h3>
+    //   </div>
+    //   <div>
+    //     <h3 style={contentStyle}>4</h3>
+    //   </div>
+    // </Carousel>
+    <LiveShow/>
   );
 }

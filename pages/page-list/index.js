@@ -1,4 +1,4 @@
-import PostTable from "components/post/PostTable";
+import PostTable from "components/PostList/PostTable";
 function PageList() {
   // const [users, setUsers] = useState(null);
   // useEffect(() => {
