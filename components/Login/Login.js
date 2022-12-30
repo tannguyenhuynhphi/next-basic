@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { Alert, Button, Card, Checkbox, Form, Input } from "antd";
-import classes from "./main.module.scss";
+import classes from "./Login.module.scss";
 import { useRouter } from "next/router";
 import { userService } from "services";
 import AppContext from "store/app-context";
