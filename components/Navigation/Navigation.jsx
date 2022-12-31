@@ -41,7 +41,7 @@ function Navigation() {
         </Col>
         <Col span={20}>
           <Menu
-            theme="light"
+            theme="dark"
             mode="horizontal"
             // defaultSelectedKeys={["2"]}
             items={menu}
@@ -49,7 +49,7 @@ function Navigation() {
           />
         </Col>
         <Col span={3}>
-      <LeftNavi/>
+          <LeftNavi />
         </Col>
       </Row>
     </Header>

@@ -7,10 +7,13 @@ import { userService } from "services";
 import { Navigation } from "components";
 import { AppContextProvider } from "store/app-context";
 import { NotificationAction } from "components/notification/notificationAction";
-import { ConfigProvider } from "antd";
+import { ConfigProvider, Layout } from "antd";
 
 import { I18nextProvider } from "react-i18next";
 import i18n from "translation/i18n";
+
+const { Header, Footer, Sider, Content } = Layout;
+
 function App({ Component, pageProps }) {
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
@@ -49,16 +52,22 @@ function App({ Component, pageProps }) {
   }
   return (
     <>
-      {" "}
+      <Head>
+        <title>Basic</title>
+      </Head>
       <I18nextProvider i18n={i18n}>
         <AppContextProvider>
           <ConfigProvider locale={{ locale: "vi" }}>
-            <Head>
-              <title>Basic</title>
-            </Head>
-            <Navigation />
+            <Layout>
+              <Header>
+                <Navigation />
+              </Header>
+              <Content>
+                <div>{authorized && <Component {...pageProps} />}</div>
+              </Content>
+              <Footer>Footer</Footer>
+            </Layout>
             <NotificationAction />
-            <div>{authorized && <Component {...pageProps} />}</div>
           </ConfigProvider>
         </AppContextProvider>
       </I18nextProvider>
