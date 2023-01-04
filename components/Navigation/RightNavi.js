@@ -10,17 +10,27 @@ function RightNavi() {
   const items = [
     {
       key: "1",
-      label: <a href="/profile">{t("navigation.avatar.profile", "Hồ sơ")}</a>,
+      label: (
+        <a href="/profile">{t("navigation.avatar.profile.title", "Hồ sơ")}</a>
+      ),
     },
     {
       key: "2",
+      label: (
+        <a href="/page-list">
+          {t("navigation.avatar.pagesLis.title", "Danh sách Post")}
+        </a>
+      ),
+    },
+    {
+      key: "3",
       label: (
         <a
           onClick={() => {
             userService.logout();
           }}
         >
-          {t("navigation.avatar.logout", "Đăng xuất")}
+          {t("navigation.avatar.logout.title", "Đăng xuất")}
         </a>
       ),
     },
@@ -36,6 +46,7 @@ function RightNavi() {
           unCheckedChildren="en"
           defaultChecked
         />
+
         <Dropdown
           menu={{
             items,
@@ -45,6 +56,10 @@ function RightNavi() {
         >
           <Avatar icon={<UserOutlined />} />
         </Dropdown>
+
+        <div className={classes.textUser}>
+          <span>kbi tan</span>
+        </div>
       </div>
     </div>
   );

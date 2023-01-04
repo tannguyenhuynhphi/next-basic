@@ -20,7 +20,7 @@ function Navigation() {
 
   const menu = [
     { key: 1, label: "Home" },
-    { key: 2, label: "Page" },
+    { key: 2, label: "Post" },
   ];
   const onClick = (info) => {
     console.log("info", info);
@@ -28,7 +28,7 @@ function Navigation() {
       case "1":
         return router.push("/");
       case "2":
-        return router.push("/page-list");
+        return router.push("/post");
       default:
         return null;
     }

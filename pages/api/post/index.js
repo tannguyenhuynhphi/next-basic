@@ -2,6 +2,7 @@ import {
   connectToDatabase,
   countDocuments,
   getAllDocuments,
+  getMapItem,
 } from "data/database";
 import { Schema } from "data/Schema";
 import { apiHandler } from "helpers/api";
@@ -60,16 +61,30 @@ function handler(req, res) {
       return;
     }
     try {
-      const posts = await getAllDocuments(
+      // const posts = await getAllDocuments(
+      //   client,
+      //   Schema.POSTS,
+      //   filter,
+      //   sorters,
+      //   pages,
+      //   limits
+      // );
+      const posts = await getMapItem( 
         client,
         Schema.POSTS,
         filter,
         sorters,
         pages,
-        limits
-      );
+        limits);
+        function getDataUnNull(posts){
+          for(var i=0 ;i<=posts.length;i++){
+            if(posts[i]){
+              return posts[i]
+            }
+          }
+        }
       const resp = {
-        data: posts,
+        data: getDataUnNull(posts),
         total:
           Object.entries(filter).length === 0
             ? await countDocuments(client, Schema.POSTS)

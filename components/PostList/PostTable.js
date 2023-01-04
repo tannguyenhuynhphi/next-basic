@@ -10,6 +10,7 @@ import { useState, useEffect, lazy, useRef } from "react";
 import { postService } from "services";
 import { DatePicker, Space } from "antd";
 import { useTranslation } from "react-i18next";
+import PostModal from "./PostModal";
 
 const ProTable = lazy(() => import("@ant-design/pro-table"));
 
@@ -85,7 +86,7 @@ function PostTable() {
     },
     {
       title: "create",
-      dataIndex: "create",
+      dataIndex: ["userPost", "name"],
       key: "create",
       width: 150,
       sorter: true,
@@ -154,6 +155,7 @@ function PostTable() {
     filter.ranges = range ? [startDateValue, endDateValue] : "";
     setFilter(filter);
   };
+  console.log("data", JSON.stringify(data));
   return (
     <ProTable
       rowSelection={{
@@ -161,7 +163,7 @@ function PostTable() {
         columnTitle: false,
       }}
       search={false}
-      headerTitle={t("page.post.title","POST LIST")}
+      headerTitle={t("page.post.title", "POST LIST")}
       columns={columns}
       onReset={onReset}
       dataSource={data}
@@ -210,6 +212,7 @@ function PostTable() {
           Tìm kiếm
         </Button>,
         <Button icon={<ExportOutlined />}>xuất</Button>,
+        <PostModal/>
       ]}
       pagination={{
         pageSizeOptions: [5, 10, 15],
