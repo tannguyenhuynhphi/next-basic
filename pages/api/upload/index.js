@@ -25,17 +25,15 @@ function handler(req, res) {
   async function uploadFiles() {
     try {
       await upload(req, res);
-
       if (req.files.length <= 0) {
         return res
           .status(400)
           .send({ message: "You must select at least 1 file." });
       }
-
+      console.log("adsdfsd", req);
       return res.status(200).send({
         message: "Files have been uploaded.",
       });
-
     } catch (error) {
       console.log(error);
 
@@ -58,8 +56,8 @@ function handler(req, res) {
     try {
       const client = await connectToDatabase();
       const db = client.db();
-      const images = db.collection("photo" + ".files")
-      
+      const images = db.collection("photo" + ".files");
+
       const cursor = images.find({});
       if ((await cursor.count()) === 0) {
         return res.status(500).send({
