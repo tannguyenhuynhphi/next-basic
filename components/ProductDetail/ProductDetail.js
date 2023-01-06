@@ -1,6 +1,7 @@
 import { Button, Card, Col, Form, Image, InputNumber, Rate, Row } from "antd";
 import classes from "./ProductDetail.module.scss";
 import { Typography } from "antd";
+import { AppstoreAddOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 
 const { Title, Paragraph, Text } = Typography;
 function ProductDetail() {
@@ -60,10 +61,10 @@ function ProductDetail() {
               </Form.Item>
             </Form.Item>
             <Form.Item>
-              <Button style={{ margin: "5px" }} htmlType="submit">
+              <Button icon={<AppstoreAddOutlined />} style={{ margin: "5px" }} htmlType="submit">
                 Mua ngay
               </Button>
-              <Button style={{ margin: "5px" }}>Thêm giỏ hàng</Button>
+              <Button icon={<ShoppingCartOutlined />} style={{ margin: "5px" }}>Thêm giỏ hàng</Button>
             </Form.Item>
           </Form>
         </Col>

@@ -11,6 +11,7 @@ import { ConfigProvider, Layout } from "antd";
 
 import { I18nextProvider } from "react-i18next";
 import i18n from "translation/i18n";
+import Navbar from "components/Navigation/Navbar";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -57,10 +58,12 @@ function App({ Component, pageProps }) {
       </Head>
       <I18nextProvider i18n={i18n}>
         <AppContextProvider>
+        <Navbar/>
           <ConfigProvider locale={{ locale: "vi" }}>
             <Layout>
               <Header>
-                <Navigation />
+            
+                {/* <Navigation /> */}
               </Header>
               <Content>
                 <div>{authorized && <Component {...pageProps} />}</div>

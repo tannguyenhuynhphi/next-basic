@@ -1,4 +1,8 @@
-import { AppleOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  AppleOutlined,
+  ShoppingCartOutlined,
+  UserOutlined,
+} from "@ant-design/icons";
 import { Avatar, Dropdown, Switch } from "antd";
 import { useTranslation } from "react-i18next";
 import { userService } from "services";
@@ -46,7 +50,7 @@ function RightNavi() {
           unCheckedChildren="en"
           defaultChecked
         />
-
+        <ShoppingCartOutlined />
         <Dropdown
           menu={{
             items,
