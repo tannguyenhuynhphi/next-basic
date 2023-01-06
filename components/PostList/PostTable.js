@@ -4,13 +4,13 @@ import {
   ExportOutlined,
   SearchOutlined,
 } from "@ant-design/icons";
-import { Button, Input, Select, Tag } from "antd";
+import { Button, Image, Input, Select, Tag } from "antd";
 import { FormatDatetime, FormatRangePicker } from "helpers/formatDatetime";
 import { useState, useEffect, lazy, useRef } from "react";
 import { postService } from "services";
 import { DatePicker, Space } from "antd";
 import { useTranslation } from "react-i18next";
-import PostModal from "./PostModal";
+import PostDialog from "./PostDialog";
 
 const ProTable = lazy(() => import("@ant-design/pro-table"));
 
@@ -76,6 +76,9 @@ function PostTable() {
       key: "image",
       width: 150,
       sorter: true,
+      render: (image) => {
+        return <Image width={200} src={image} />;
+      },
     },
     {
       title: "location",
@@ -212,7 +215,7 @@ function PostTable() {
           Tìm kiếm
         </Button>,
         <Button icon={<ExportOutlined />}>xuất</Button>,
-        <PostModal/>
+        <PostDialog />,
       ]}
       pagination={{
         pageSizeOptions: [5, 10, 15],

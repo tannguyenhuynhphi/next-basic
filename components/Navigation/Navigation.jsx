@@ -21,6 +21,7 @@ function Navigation() {
   const menu = [
     { key: 1, label: "Home" },
     { key: 2, label: "Post" },
+    { key: 3, label: "Product" },
   ];
   const onClick = (info) => {
     console.log("info", info);
@@ -29,6 +30,8 @@ function Navigation() {
         return router.push("/");
       case "2":
         return router.push("/post");
+      case "3":
+        return router.push("/product");
       default:
         return null;
     }

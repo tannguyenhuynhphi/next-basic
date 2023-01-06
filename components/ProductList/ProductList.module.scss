@@ -1,0 +1,10 @@
+.productTitle {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  height: 55px;
+}
+.productFooter {
+  margin: 5px;
+}

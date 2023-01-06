@@ -30,9 +30,8 @@ function handler(req, res) {
           .status(400)
           .send({ message: "You must select at least 1 file." });
       }
-      console.log("adsdfsd", req);
       return res.status(200).send({
-        message: "Files have been uploaded.",
+        response: req.files,
       });
     } catch (error) {
       console.log(error);

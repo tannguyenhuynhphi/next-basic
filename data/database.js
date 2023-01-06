@@ -1,6 +1,7 @@
 import { MongoClient, ObjectId } from "mongodb";
 import { Schema } from "./Schema";
-
+import getConfig from "next/config";
+const { publicRuntimeConfig } = getConfig();
 export async function connectToDatabase() {
   if (process.env.NODE_ENV === "development") {
     const client = await MongoClient.connect(
@@ -110,6 +111,7 @@ export async function getMapItem(
         .collection(Schema.USERS)
         .findOne(idObjectId);
       item.userPost = { name, _id, email };
+      item.image = publicRuntimeConfig.baseUrl+item.image;
       newFriendPosts.push(item);
       if (post.length === newFriendPosts.length) {
         return newFriendPosts;
