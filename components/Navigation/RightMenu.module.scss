@@ -1,0 +1,39 @@
+.rightDiv {
+  margin: 5px;
+}
+.menuRight {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  color: white;
+}
+.changeLanguage {
+  position: relative;
+  width: 1.2em;
+  height: 1.2em;
+}
+.changeLanguageSpanVi{
+    position: absolute;
+    font-size: 1.2em;
+    line-height: 1;
+    border: 1px solid rgba(0, 0, 0, 0.88);
+    color: rgba(0, 0, 0, 0.88);
+    right: -5%;
+    bottom: 0;
+    z-index: 0;
+    transform-origin: 100% 100%;
+    transform: scale(0.5);
+}
+.changeLanguageSpanEn{
+    position: absolute;
+    font-size: 1.2em;
+    line-height: 1;
+    border: 1px solid rgba(0, 0, 0, 0.88);
+    color: #ffffff;
+    left: -5%;
+    top: 0;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.88);
+    transform-origin: 0 0;
+    transform: scale(0.7);
+}

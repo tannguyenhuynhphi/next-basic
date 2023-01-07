@@ -57,7 +57,6 @@ function App({ Component, pageProps }) {
       </Head>
       <I18nextProvider i18n={i18n}>
         <AppContextProvider>
-      
           <ConfigProvider locale={{ locale: "vi" }}>
             <Layout>
               <Header>

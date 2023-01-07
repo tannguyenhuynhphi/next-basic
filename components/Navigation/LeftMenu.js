@@ -27,7 +27,7 @@ function LeftMenu() {
       theme="dark"
       mode="horizontal"
       // defaultSelectedKeys={["2"]}
-      style={{ width: '1000%' }}
+      style={{ width: '150%' }}
       items={menu}
       onClick={onClick}
     />

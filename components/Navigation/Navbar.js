@@ -1,5 +1,5 @@
-import { UserOutlined } from "@ant-design/icons";
-import { Avatar, Button, Drawer } from "antd";
+
+import { Button, Drawer } from "antd";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { userService } from "services";
