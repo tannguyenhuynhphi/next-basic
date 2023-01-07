@@ -17,23 +17,22 @@ function Navbar() {
   // only show nav when logged in
   if (!user) return null;
   const showDrawer = () => {
-    setvVisible(true)
+    setvVisible(true);
   };
   const onClose = () => {
-    setvVisible(false)
+    setvVisible(false);
   };
   return (
     <nav className="menuBar">
       <div className="logo">
         <a href="www.marca.com">logo</a>
       </div>
+      <div className="leftMenu">
+        <LeftMenu />
+      </div>
       <div className="menuCon">
-        <div className="leftMenu">
-          <LeftMenu />
-        </div>
         <div className="rightMenu">
           <RightMenu />
-          <Avatar icon={<UserOutlined />} />
         </div>
         <Button className="barsMenu" type="primary" onClick={showDrawer}>
           <span className="barsBtn" />

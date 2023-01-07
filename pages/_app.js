@@ -4,7 +4,6 @@ import { useRouter } from "next/router";
 
 import "styles/globals.css";
 import { userService } from "services";
-import { Navigation } from "components";
 import { AppContextProvider } from "store/app-context";
 import { NotificationAction } from "components/notification/notificationAction";
 import { ConfigProvider, Layout } from "antd";
@@ -58,11 +57,11 @@ function App({ Component, pageProps }) {
       </Head>
       <I18nextProvider i18n={i18n}>
         <AppContextProvider>
-        <Navbar/>
+      
           <ConfigProvider locale={{ locale: "vi" }}>
             <Layout>
               <Header>
-            
+              <Navbar/>
                 {/* <Navigation /> */}
               </Header>
               <Content>

@@ -10,8 +10,17 @@ body {
 .menuBar {
   padding: 0 20px;
   border-bottom: solid 1px #e8e8e8;
-  overflow: auto;
   box-shadow: 0 0 30px #f3f1f1;
+  height: 60px;
+  display: flex;
+  align-items: center;
+}
+:where(.css-dev-only-do-not-override-9ntgx0).ant-layout .ant-layout-header {
+  height: auto;
+  padding-inline: 0px;
+  color: rgba(0, 0, 0, 0.88);
+  line-height: 0px;
+  background: #001529;
 }
 .logo {
   width: 150px;
