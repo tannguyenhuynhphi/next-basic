@@ -36,7 +36,7 @@ const LoginComponents = () => {
     <Card
       className={classes.main}
       title="LOGIN"
-      extra={<a href="#">More</a>}
+      // extra={<a href="#">More</a>}
       style={{ width: 400 }}
     >
       <Form

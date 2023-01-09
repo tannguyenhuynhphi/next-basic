@@ -3,5 +3,6 @@ const Schema = {
     EVENT: "event",
     IMAGE: "image",
     POSTS: "posts",
+    PRODUCT: "product"
 };
 export {Schema};

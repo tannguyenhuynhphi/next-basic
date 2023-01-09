@@ -1,14 +1,11 @@
 import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
-import { Avatar, Dropdown, Menu } from "antd";
+import { Avatar, Dropdown, Tooltip } from "antd";
 import { useTranslation } from "react-i18next";
 import { userService } from "services";
 import classes from "./RightMenu.module.scss";
 import i18n from "translation/i18n";
-import { useState } from "react";
 function RightMenu() {
   const { t } = useTranslation();
-  const [translation, setTranslation] = useState("vi");
-  console.log(translation);
   const items = [
     {
       key: "1",
@@ -37,33 +34,32 @@ function RightMenu() {
       ),
     },
   ];
-  const handchange = (value) => {
-    console.log("asds", value);
-    setTranslation(value);
-    i18n.changeLanguage(value);
-  };
-  // checked ? i18n.changeLanguage("vi") : i18n.changeLanguage("en");
+  const text = <span>Việt/Anh</span>;
   return (
     <div className={classes.menuRight}>
       <div className={classes.rightDiv}>
-        {translation === "vi" ? (
-          <button onClick={() => handchange("en")} class="css-1bkeob3">
-            <div class="btn-inner">
-              <div className={classes.changeLanguage}>
-                <span className={classes.changeLanguageSpanVi}>En</span>
-                <span className={classes.changeLanguageSpanEn}>Vi</span>
+        {i18n.language === "vi" ? (
+          <Tooltip placement="bottom" title={text}>
+            <button onClick={() => i18n.changeLanguage("en")}>
+              <div class="btn-inner">
+                <div className={classes.changeLanguage}>
+                  <span className={classes.changeLanguageSpanVi}>En</span>
+                  <span className={classes.changeLanguageSpanEn}>Vi</span>
+                </div>
               </div>
-            </div>
-          </button>
+            </button>
+          </Tooltip>
         ) : (
-          <button onClick={() => handchange("vi")} class="css-1bkeob3">
-            <div class="btn-inner">
-              <div className={classes.changeLanguage}>
-                <span className={classes.changeLanguageSpanVi}>Vi</span>
-                <span className={classes.changeLanguageSpanEn}>En</span>
+          <Tooltip placement="bottom" title={text}>
+            <button onClick={() => i18n.changeLanguage("vi")}>
+              <div class="btn-inner">
+                <div className={classes.changeLanguage}>
+                  <span className={classes.changeLanguageSpanVi}>Vi</span>
+                  <span className={classes.changeLanguageSpanEn}>En</span>
+                </div>
               </div>
-            </div>
-          </button>
+            </button>
+          </Tooltip>
         )}
       </div>
       <div className={classes.rightDiv}>

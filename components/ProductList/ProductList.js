@@ -3,6 +3,7 @@ import { Badge, Button, Card, Image } from "antd";
 import { Space, Typography } from "antd";
 import classes from "./ProductList.module.scss";
 import { useRouter } from "next/router";
+import { ShoppingCartOutlined } from "@ant-design/icons";
 const { Text, Title } = Typography;
 
 const ProductList = (props) => {
@@ -16,7 +17,7 @@ const ProductList = (props) => {
     router.push("/product/" + Value);
   };
   return (
-    <Card title="Product">
+    <Card style={{ borderRadius: "0px" }} title="Product">
       {props.data.map((item) => (
         <Card.Grid style={gridStyle}>
           <Badge.Ribbon text={`sale ${item.promotion}%`} color="red" />
@@ -34,9 +35,14 @@ const ProductList = (props) => {
             <Text delete>{(item.price * item.promotion) / 100}(VND)</Text>
           </div>
           <div className={classes.productFooter}>
-            <Button type="dashed" onClick={() => onDetail(item.price)}>
-              Chi tiết
-            </Button>
+            <div className={classes.productbutton}>
+              <Button type="dashed" onClick={() => onDetail(item.price)}>
+                Chi tiết
+              </Button>
+            </div>
+            <div className={classes.productbutton}>
+              <Button type="dashed" icon={<ShoppingCartOutlined />}>+</Button>
+            </div>
           </div>
         </Card.Grid>
       ))}

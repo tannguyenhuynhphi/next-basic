@@ -61,7 +61,7 @@ function Product() {
       name: "There is a chance (in your original code) that IE attempts to set the value of the input to a reference to that actual element (ignores the error) but leaves you with no new value.",
       detail:
         "Khi sắp xếp nhiều trường, bạn nên khai báo các trường sẽ được sắp xếp theo phương thức sắp xếp ( ). Truy vấn sẽ được sắp xếp theo vị trí khai báo của các trường, trong đó thứ tự sắp xếp được đánh giá từ trái sang phải. Để chứng minh điều này, chúng tôi sẽ sử dụng bộ sưu tập",
-      imageUrl: "http://localhost:3000/api/files/1671436755282-bezkoder-a56fa61c347eec20b56f-removebg-preview.png",
+      imageUrl: "http://localhost:3000/api/files/1672975418273-bezkoder-download (1).jpg",
       active: false,
       price: "1000000",
       promotion: 10,

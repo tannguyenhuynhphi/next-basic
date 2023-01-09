@@ -61,7 +61,6 @@ function App({ Component, pageProps }) {
             <Layout>
               <Header>
               <Navbar/>
-                {/* <Navigation /> */}
               </Header>
               <Content>
                 <div>{authorized && <Component {...pageProps} />}</div>
