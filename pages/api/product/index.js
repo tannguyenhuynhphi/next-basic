@@ -1,7 +1,8 @@
-import { connectToDatabase, getAllDocuments } from "data/database";
-import { ProductModel } from "data/model/product";
+import { connectToDatabase, countDocuments, getAllDocuments } from "data/database";
+import { ProductModel } from "data/model";
+
 import { Schema } from "data/Schema";
-import { apiHandler } from "helpers/api";
+import { apiHandler, getFilter } from "helpers";
 import { ObjectId } from "mongodb";
 
 export default apiHandler(handler);
@@ -16,19 +17,41 @@ function handler(req, res) {
   }
 
   async function getProducts() {
-    var cust = new ProductModel(12, "Tom", "New Jersey", "234987");
-    console.log(cust);
+    var filterWrapper = await getFilter(req);
+    let client;
+    try {
+      client = await connectToDatabase();
+    } catch (error) {
+      res.status(500).json({ message: "Connecting to the database failed!" });
+      return;
+    }
+    try {
+        const product = await getAllDocuments(
+        client,
+        Schema.PRODUCT,
+        filterWrapper.filter,
+        filterWrapper.sorters,
+        filterWrapper.pages,
+        filterWrapper.limits
+      );
+      const resp = {
+        data: product,
+        total:
+          Object.entries(filterWrapper.filter).length === 0
+            ? await countDocuments(client, Schema.PRODUCT)
+            : product.length,
+      };
+      client.close();
+      return res.status(200).json(resp);
+    } catch (error) {
+      client.close();
+      res.status(500).json({ message: "Getting event failed." });
+    }
   }
+
   async function newProducts() {
-    const {
-      name,
-      detail,
-      imageUrl,
-      active,
-      price,
-      promotion,
-      quantity,
-    } = req.body;
+    const { name, detail, imageUrl, active, price, promotion, quantity } =
+      req.body;
     if (!name) {
       res.status(422).json({
         message: "Invalid input - characters long.",
@@ -37,19 +60,18 @@ function handler(req, res) {
     }
     const client = await connectToDatabase();
     const db = client.db();
-    const post = {
-      name: name,
-      detail: detail,
-      imageUrl: imageUrl,
-      active: active,
-      price: price,
-      promotion: promotion,
-      quantity: quantity,
-      dateCreated: new Date().valueOf(),
-      dateUpdate: new Date().valueOf(),
-    };
-    await db.collection(Schema.PRODUCT).insertOne(post);
-    res.status(201).json({ success: post });
+    var product = new ProductModel();
+    product.setName(name);
+    product.setDetail(detail);
+    product.setImageUrl(imageUrl);
+    product.setActive(active);
+    product.setPromotion(promotion);
+    product.setPrice(price);
+    product.setQuantity(quantity);
+    product.setDateCreated(new Date().valueOf());
+    product.setDateUpdate(new Date().valueOf());
+    await db.collection(Schema.PRODUCT).insertOne(product);
+    res.status(201).json({ success: product });
     client.close();
   }
 }

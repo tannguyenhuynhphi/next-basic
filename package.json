@@ -6,13 +6,14 @@
         "dev": "NODE_ENV=development & next dev",
         "build": "NODE_ENV=production & next build",
         "start": "next start",
-        "i18" : "i18next-scanner"
+        "i18": "i18next-scanner"
     },
     "dependencies": {
         "@ant-design/icons": "^4.8.0",
         "@ant-design/pro-table": "^3.2.7",
         "@hookform/resolvers": "^2.6.1",
         "antd": "^5.1.0",
+        "antd-img-crop": "^4.5.2",
         "bcryptjs": "^2.4.3",
         "eslint-config-next": "^13.0.7",
         "express-jwt": "^6.0.0",

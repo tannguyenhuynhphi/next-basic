@@ -5,8 +5,7 @@ import {
   getMapItem,
 } from "data/database";
 import { Schema } from "data/Schema";
-import { apiHandler } from "helpers/api";
-import { FormatToTimestamp } from "helpers/formatDatetime";
+import { apiHandler, getFilter } from "helpers";
 import { ObjectId } from "mongodb";
 
 // users in JSON file for simplicity, store in a db for production applications
@@ -25,34 +24,7 @@ function handler(req, res) {
   }
   //get
   async function getPost() {
-    var pages = 0;
-    var limits = 10;
-    var sorters = { _id: -1 };
-    var filter = {};
-    if (req.query.page) {
-      pages = parseInt(req.query.page);
-    }
-    if (req.query.limit) {
-      limits = parseInt(req.query.limit);
-    }
-    if (req.query.column) {
-      var column = req.query.column;
-      var order = req.query.order;
-      sorters = JSON.parse(`{"${column}":${order}}`);
-    }
-    if (req.query.title) {
-      filter.title = { $regex: req.query.title };
-    }
-    if (req.query.active) {
-      filter.active = req.query.active === "true" ? true : false;
-    }
-    if (req.query.startDate && req.query.endDate) {
-      filter.dateCreated = {
-        $gte: FormatToTimestamp(req.query.startDate),
-        $lt: FormatToTimestamp(req.query.endDate) + 86399999,
-      };
-    }
-    console.log("filter", filter);
+    var filterWrapper = await getFilter(req);
     let client;
     try {
       client = await connectToDatabase();
@@ -61,32 +33,25 @@ function handler(req, res) {
       return;
     }
     try {
-      // const posts = await getAllDocuments(
-      //   client,
-      //   Schema.POSTS,
-      //   filter,
-      //   sorters,
-      //   pages,
-      //   limits
-      // );
-      const posts = await getMapItem( 
+      const posts = await getMapItem(
         client,
         Schema.POSTS,
-        filter,
-        sorters,
-        pages,
-        limits);
-        function getDataUnNull(posts){
-          for(var i=0 ;i<=posts.length;i++){
-            if(posts[i]){
-              return posts[i]
-            }
+        filterWrapper.filter,
+        filterWrapper.sorters,
+        filterWrapper.pages,
+        filterWrapper.limits
+      );
+      function getDataUnNull(posts) {
+        for (var i = 0; i <= posts.length; i++) {
+          if (posts[i]) {
+            return posts[i];
           }
         }
+      }
       const resp = {
         data: getDataUnNull(posts),
         total:
-          Object.entries(filter).length === 0
+          Object.entries(filterWrapper.filter).length === 0
             ? await countDocuments(client, Schema.POSTS)
             : posts.length,
       };
