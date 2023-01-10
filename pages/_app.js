@@ -11,6 +11,7 @@ import { ConfigProvider, Layout } from "antd";
 import { I18nextProvider } from "react-i18next";
 import i18n from "translation/i18n";
 import Navbar from "components/Navigation/Navbar";
+import FooterLayout from "components/Footer";
 
 const { Header, Footer, Sider, Content } = Layout;
 
@@ -60,13 +61,14 @@ function App({ Component, pageProps }) {
           <ConfigProvider locale={{ locale: "vi" }}>
             <Layout>
               <Header>
-              <Navbar/>
-                {/* <Navigation /> */}
+                <Navbar />
               </Header>
               <Content>
                 <div>{authorized && <Component {...pageProps} />}</div>
               </Content>
-              <Footer>Footer</Footer>
+              <Footer style={{ padding: "0px" }}>
+                <FooterLayout />
+              </Footer>
             </Layout>
             <NotificationAction />
           </ConfigProvider>
