@@ -16,6 +16,7 @@ export const productService = {
   },
 //   addPost,
   getProduct,
+  getProductId,
 };
 function getProduct(limit, page, filter) {
   var baseUrls = baseUrl + "?limit=" + limit + "&page=" + page;
@@ -36,5 +37,9 @@ function getProduct(limit, page, filter) {
 //       "&endDate=" +
 //       filter.ranges[1];
 //   }
+  return fetchWrapper.get(baseUrls);
+}
+function getProductId(id) {
+  var baseUrls = baseUrl +"/"+ id
   return fetchWrapper.get(baseUrls);
 }
