@@ -1,7 +1,6 @@
 import { ExportOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Form, Input, Select, Upload } from "antd";
 import ModalContent from "components/Common/ModalContent/ModalContent";
-import UploadContent from "components/Common/UploadAvatar/UploadAvatar";
 import UploadBox from "components/Common/UploadDrop/UploadBox";
 import { useState } from "react";
 import { postService } from "services";

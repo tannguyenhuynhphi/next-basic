@@ -119,3 +119,31 @@ export async function getMapItem(
     })
   );
 }
+
+export async function getMapItemProduct(
+  client,
+  collection,
+  filter,
+  sort,
+  skip,
+  limit
+) {
+  const db = client.db();
+  const product = await db
+    .collection(collection)
+    .find(filter)
+    .sort(sort)
+    .skip(skip)
+    .limit(limit)
+    .toArray();
+  const newProducts = [];
+  return await Promise.all(
+    product.map(async (item) => {
+      item.imageUrl = publicRuntimeConfig.baseUrl+item.imageUrl;
+      newProducts.push(item);
+      if (product.length === newProducts.length) {
+        return newProducts;
+      }
+    })
+  );
+}

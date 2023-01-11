@@ -16,6 +16,8 @@ import FooterLayout from "components/Footer";
 const { Header, Footer, Sider, Content } = Layout;
 
 function App({ Component, pageProps }) {
+  console.log("Component",Component)
+  console.log("pageProps",pageProps)
   const router = useRouter();
   const [authorized, setAuthorized] = useState(false);
 

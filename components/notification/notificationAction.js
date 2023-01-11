@@ -1,21 +1,35 @@
-import {useContext } from "react";
+import { notification } from "antd";
+import { useContext } from "react";
 import AppContext from "store/app-context";
-import Notification from "./notification";
 
 export { NotificationAction };
 
 function NotificationAction() {
-    const notificationCtx = useContext(AppContext);
-    const activeNotification = notificationCtx.notification;
-  return (
-    <>
-      {activeNotification && (
-        <Notification
-          title={activeNotification.title}
-          message={activeNotification.message}
-          status={activeNotification.status}
-        />
-      )}
-    </> 
-  );
+  const notificationCtx = useContext(AppContext);
+  const [api, contextHolder] = notification.useNotification();
+  const activeNotification = notificationCtx.notification;
+  const openNotificationWithIcon = (type) => {
+    api[type]({
+      message: activeNotification && activeNotification.title,
+      description: activeNotification && activeNotification.message,
+    });
+  };
+  switch (activeNotification && activeNotification.status) {
+    case "success":
+      openNotificationWithIcon("success");
+      break;
+    case "info":
+      openNotificationWithIcon("info");
+      break;
+    case "error":
+      openNotificationWithIcon("error");
+      break;
+    case "warning":
+      openNotificationWithIcon("warning");
+      break;
+    default:
+      break;
+  }
+
+  return <>{contextHolder}</>;
 }

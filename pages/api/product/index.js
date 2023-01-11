@@ -1,4 +1,4 @@
-import { connectToDatabase, countDocuments, getAllDocuments } from "data/database";
+import { connectToDatabase, countDocuments, getAllDocuments, getMapItemProduct } from "data/database";
 import { ProductModel } from "data/model";
 
 import { Schema } from "data/Schema";
@@ -26,7 +26,7 @@ function handler(req, res) {
       return;
     }
     try {
-        const product = await getAllDocuments(
+      const product = await getMapItemProduct(
         client,
         Schema.PRODUCT,
         filterWrapper.filter,
@@ -34,8 +34,15 @@ function handler(req, res) {
         filterWrapper.pages,
         filterWrapper.limits
       );
+      function getDataUnNull(product) {
+        for (var i = 0; i <= product.length; i++) {
+          if (product[i]) {
+            return product[i];
+          }
+        }
+      }
       const resp = {
-        data: product,
+        data: getDataUnNull(product),
         total:
           Object.entries(filterWrapper.filter).length === 0
             ? await countDocuments(client, Schema.PRODUCT)
@@ -64,7 +71,7 @@ function handler(req, res) {
     product.setName(name);
     product.setDetail(detail);
     product.setImageUrl(imageUrl);
-    product.setActive(active);
+    product.setActive(active?active:true);
     product.setPromotion(promotion);
     product.setPrice(price);
     product.setQuantity(quantity);

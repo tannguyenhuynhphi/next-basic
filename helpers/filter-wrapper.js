@@ -3,7 +3,7 @@ import { FormatToTimestamp } from "./formatDatetime";
 export async function getFilter(req) {
   var pages = 0;
   var limits = 12;
-  var sorters = { _id: -1 };
+  var sorters = { dateCreated: -1 };
   var filter = {};
   if (req.query.page) {
     pages = parseInt(req.query.page);

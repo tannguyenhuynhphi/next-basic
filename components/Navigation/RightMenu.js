@@ -24,6 +24,14 @@ function RightMenu() {
     {
       key: "3",
       label: (
+        <a href="/product-manager">
+          {t("navigation.avatar.product.title", "Danh sách Product")}
+        </a>
+      ),
+    },
+    {
+      key: "4",
+      label: (
         <a
           onClick={() => {
             userService.logout();
