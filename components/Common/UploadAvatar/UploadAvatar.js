@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { PlusOutlined } from "@ant-design/icons";
 import { Button, Modal, Upload } from "antd";
 import { uploadService } from "services/upload.service";
+import { useTranslation } from "react-i18next";
 const getBase64 = (file) =>
   new Promise((resolve, reject) => {
     const reader = new FileReader();
@@ -10,6 +11,7 @@ const getBase64 = (file) =>
     reader.onerror = (error) => reject(error);
   });
 const UploadContent = () => {
+  const { t } = useTranslation();
   const [previewOpen, setPreviewOpen] = useState(false);
   const [previewImage, setPreviewImage] = useState("");
   const [previewTitle, setPreviewTitle] = useState("");

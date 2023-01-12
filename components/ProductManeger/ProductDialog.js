@@ -6,10 +6,11 @@ import { useContext, useEffect, useState } from "react";
 import { productService } from "services/product.service";
 import classes from "./ProductDialog.module.scss";
 import AppContext from "store/app-context";
-function ProductDialog(props) {
-  console.log("ádasds", props);
-  const [form] = Form.useForm();
+import { useTranslation } from "react-i18next";
 
+function ProductDialog(props) {
+  const [form] = Form.useForm();
+  const { t } = useTranslation();
   useEffect(() => {
     if (props && props.data) {
       const init = {
@@ -21,7 +22,7 @@ function ProductDialog(props) {
       };
       form.setFieldsValue(init);
     } else {
-        const init  = {
+      const init = {
         name: "",
         detail: "",
         quantity: 100,
@@ -30,8 +31,6 @@ function ProductDialog(props) {
       };
       form.setFieldsValue(init);
     }
-
-
   }, []);
   const { TextArea } = Input;
   const [on, setOn] = useState(false);
@@ -40,34 +39,64 @@ function ProductDialog(props) {
     setOn(value);
   };
   const onFinish = (values) => {
-    const imageUrl = document.getElementById("nameImagesUploadCutBox").value;
+    console.log("values", values);
+    const imageUrl = props.data
+      ? null
+      : document.getElementById("nameImagesUploadCutBox").value;
     const name = values.name;
     const detail = values.detail;
     const quantity = values.quantity;
     const promotion = values.promotion;
     const price = values.price;
-    if (!imageUrl) {
-      return console.log("chưa upload");
+    console.log("imageUrl", imageUrl);
+    // if (imageUrl==null) {
+    //   return console.log("chưa upload");
+    // }
+    if (props.data) {
+      productService
+        .uploadProduct(
+          props.data._id,
+          name,
+          detail,
+          quantity,
+          promotion,
+          price,
+          imageUrl
+        )
+        .then((x) => {
+          if (x.success) {
+            AppContextX.showNotification({
+              title: t("app.notification.success.title"),
+              message: t("app.notification.success.message"),
+              status: "success",
+            });
+            setOn(false), props.refresh();
+          }
+        });
+    } else {
+      productService
+        .addProduct(name, detail, quantity, imageUrl, promotion, price)
+        .then((x) => {
+          if (x.success) {
+            AppContextX.showNotification({
+              title: t("app.notification.success.title"),
+              message: t("app.notification.success.message"),
+              status: "success",
+            });
+            setOn(false), props.refresh();
+          }
+        });
     }
-    productService
-      .addProduct(name, detail, quantity, imageUrl, promotion, price)
-      .then((x) => {
-        console.log(x);
-        if (x.success) {
-          AppContextX.showNotification({
-            title: "Thông báo!",
-            message: "Thêm dữ liệu thành công",
-            status: "success",
-          });
-          setOn(false), props.refresh();
-        }
-      });
   };
   return (
     <ModalContent
       onCancel={() => onCancelModal(false)}
       open={on}
-      title={"Thêm mới"}
+      title={
+        props.data
+          ? t("page.product.modal.update.title")
+          : t("page.product.modal.add.title")
+      }
       edit={<div onClick={() => setOn(true)}>{props.edit}</div>}
     >
       <Form
@@ -82,24 +111,24 @@ function ProductDialog(props) {
         form={form}
       >
         <Form.Item
-          label="Name"
+          label={t("page.product.modal.name.title")}
           name="name"
           rules={[
             {
               required: true,
-              message: "Your title cannot be empty!",
+              message: t("page.product.modal.required.name"),
             },
           ]}
         >
-          <Input placeholder="Name" />
+          <Input placeholder={t("page.product.modal.placeholder.name")} />
         </Form.Item>
         <Form.Item
-          label="Detail"
+          label={t("page.product.modal.detail.title")}
           name="detail"
           rules={[
             {
               required: true,
-              message: "Your detail cannot be empty!",
+              message: t("page.product.modal.required.detail"),
             },
           ]}
         >
@@ -109,49 +138,44 @@ function ProductDialog(props) {
           rules={[
             {
               required: true,
-              message: "Your Quantity cannot be empty!",
+              message: t("page.product.modal.required.quantity"),
             },
           ]}
           name="quantity"
-          label="Quantity"
+          label={t("page.product.modal.quantity.title")}
         >
-          <InputNumber
-            addonBefore=""
-            addonAfter="Sản phẩm"
-            defaultValue={100}
-          />
+          <InputNumber addonBefore="" addonAfter="Sản phẩm" />
         </Form.Item>
         <Form.Item
           rules={[
             {
               required: true,
-              message: "Your Price cannot be empty!",
+              message: t("page.product.modal.required.price"),
             },
           ]}
           name="price"
-          label="Price"
+          label={t("page.product.modal.price.title")}
         >
           <InputNumber
-            defaultValue={1000}
+            // defaultValue={1000}
             formatter={(value) =>
               `$ ${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
             }
             parser={(value) => value.replace(/\$\s?|(,*)/g, "")}
-            //   onChange={onChange}
           />
         </Form.Item>
         <Form.Item
           rules={[
             {
               required: true,
-              message: "Your Promotion cannot be empty!",
+              message: t("page.product.modal.required.promotion"),
             },
           ]}
           name="promotion"
-          label="Promotion"
+          label={t("page.product.modal.promotion.title")}
         >
           <InputNumber
-            defaultValue={100}
+            // defaultValue={100}
             min={0}
             max={100}
             formatter={(value) => `${value}%`}
@@ -159,16 +183,22 @@ function ProductDialog(props) {
             //   onChange={onChange}
           />
         </Form.Item>
-
-        <Form.Item label="Upload" valuePropName="fileList">
-          <UploadCutBox />
-        </Form.Item>
+        {!props.data && (
+          <Form.Item
+            label={t("page.product.modal.action.upload")}
+            valuePropName="fileList"
+          >
+            <UploadCutBox />
+          </Form.Item>
+        )}
         <Form.Item className={classes.actionButton}>
           <Button htmlType="submit" className={classes.bottomButton}>
-            Thêm mới
+            {props.data
+              ? t("page.product.modal.action.update")
+              : t("page.product.modal.action.add")}
           </Button>
           <Button className={classes.bottomButton} onClick={() => setOn(false)}>
-            Hủy
+            {t("page.product.modal.action.cancel")}
           </Button>
         </Form.Item>
       </Form>

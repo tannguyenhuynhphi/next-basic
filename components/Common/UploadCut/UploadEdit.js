@@ -3,13 +3,14 @@ import ImgCrop from "antd-img-crop";
 import { Button, Upload } from "antd";
 import { uploadService } from "services/upload.service";
 import AppContext from "store/app-context";
+import { UploadOutlined } from "@ant-design/icons";
 import { useTranslation } from "react-i18next";
 
-const UploadCutBox = () => {
+const UploadEdit = (props) => {
   const [fileList, setFileList] = useState([]);
   const [dataFile, setDataFile] = useState(null);
-  const { t } = useTranslation();
   const AppContextX = useContext(AppContext);
+  const { t } = useTranslation();
   const getSrcFromFile = (file) => {
     return new Promise((resolve) => {
       const reader = new FileReader();
@@ -33,13 +34,11 @@ const UploadCutBox = () => {
       window.location.href = src;
     }
   };
-  const props = {
+  const propsUpload = {
     name: "file",
     multiple: false,
+    maxCount:1,
     action: "https://www.mocky.io/v2/5cc8019d300000980a055e76",
-
-    listType: "picture-card",
-    onPreview: { onPreview },
     onChange(info) {
       const { status } = info.file;
       if (status !== "uploading") {
@@ -50,13 +49,7 @@ const UploadCutBox = () => {
         formdata.append("file", info.fileList[0].originFileObj);
         uploadService.upload(formdata).then((x) => {
           setDataFile(x.response);
-          AppContextX.showNotification({
-            title: t("app.notification.success.title"),
-            message: t("app.notification.success.message"),
-            status: "success",
-          });
         });
-      
       } else if (status === "error") {
         AppContextX.showNotification({
           title: t("app.notification.error.title"),
@@ -69,19 +62,24 @@ const UploadCutBox = () => {
       console.log("Dropped files", e.dataTransfer.files);
     },
   };
-
+  const updateImages =()=>{
+    props.onUpdate()
+    setDataFile("")
+  }
   return (
     <>
-      {/* <Button onClick={onUpload}>upload</Button> */}
       <input
         style={{ display: "none" }}
-        id="nameImagesUploadCutBox"
+        id="nameImagesUploadCutEdit"
         value={dataFile && dataFile[0].filename}
       />
+      {dataFile && dataFile[0].filename&&<Button onClick={updateImages} >{t('page.product.action.update')}</Button>}
       <ImgCrop grid rotate>
-        <Upload {...props}>{fileList.length < 1 && "+ Upload"}</Upload>
+        <Upload {...propsUpload}>
+          <Button icon={<UploadOutlined />}>{t('page.product.action.updateUpload')}</Button>
+        </Upload>
       </ImgCrop>
     </>
   );
 };
-export default UploadCutBox;
+export default UploadEdit;

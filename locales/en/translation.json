@@ -1,23 +1,157 @@
 {
+  "app": {
+    "notification": {
+      "error": {
+        "message": "Successful implementation",
+        "title": "Notification"
+      },
+      "success": {
+        "message": "Execution failed",
+        "title": "Notification"
+      }
+    }
+  },
   "navigation": {
     "avatar": {
-      "logout": "Đăng xuất",
-      "profile": "Hồ sơ"
+      "logout": {
+        "title": "Logout"
+      },
+      "pagesLis": {
+        "title": "Post List"
+      },
+      "product": {
+        "title": "Product List"
+      },
+      "profile": {
+        "title": "Profile"
+      }
+    },
+    "menu": {
+      "home": {
+        "title": "Home"
+      },
+      "post": {
+        "title": "Post"
+      },
+      "product": {
+        "title": "Product"
+      }
     }
   },
   "page": {
+    "login": {
+      "ForgotPassword": "Forgot Password",
+      "action": {
+        "submit": "Login"
+      },
+      "placeholder": {
+        "password": "Password",
+        "username": "Username"
+      },
+      "remember": "Remember",
+      "required": {
+        "password": "Please input your Password!",
+        "username": "Please input your Username!"
+      },
+      "title": "Login"
+    },
     "post": {
       "title": "POST LIST"
     },
+    "product": {
+      "action": {
+        "add": "add",
+        "export": "export",
+        "search": "search",
+        "update": "update",
+        "updateUpload": "Update image"
+      },
+      "columns": {
+        "active": {
+          "title": "Active"
+        },
+        "dateCreated": {
+          "title": "Date Created"
+        },
+        "dateUpdate": {
+          "title": "Date Update"
+        },
+        "detail": {
+          "title": "Detail"
+        },
+        "edit": {
+          "title": "Edit"
+        },
+        "imageUrl": {
+          "title": "ImageUrl"
+        },
+        "name": {
+          "title": "Name"
+        },
+        "price": {
+          "title": "Price"
+        },
+        "promotion": {
+          "title": "Promotion"
+        },
+        "quantity": {
+          "title": "Quantity"
+        }
+      },
+      "modal": {
+        "action": {
+          "add": "add",
+          "cancel": "cancel",
+          "update": "update",
+          "upload": "upload"
+        },
+        "add": {
+          "title": "Add"
+        },
+        "detail": {
+          "title": "Detail"
+        },
+        "name": {
+          "title": "Name"
+        },
+        "placeholder": {
+          "name": "Name"
+        },
+        "price": {
+          "title": "Price"
+        },
+        "promotion": {
+          "title": "Promotion"
+        },
+        "quantity": {
+          "title": "Quantity"
+        },
+        "required": {
+          "detail": "Your detail cannot be empty!",
+          "name": "Your name cannot be empty!",
+          "price": "Your price cannot be empty!",
+          "promotion": "Your promotion cannot be empty!",
+          "quantity": "Your quantity cannot be empty!"
+        },
+        "update": {
+          "title": "update"
+        }
+      },
+      "title": "Product List"
+    },
+    "productList": {
+      "title": "Product"
+    },
     "profile": {
-      "CMND_CCCD": "CMND_CCCD:",
-      "address": "Địa chỉ:",
-      "date_of_birth": "Ngày sinh:",
+      "address": "Address:",
+      "date_of_birth": "Date of birth:",
       "email": "Email:",
-      "gender": "Giới tính:",
-      "name": "Họ Tên:",
-      "phone": "Số điện thoại:",
-      "title": "Thông tin"
+      "gender": "Gender:",
+      "header": {
+        "title": "Information"
+      },
+      "name": "Name:",
+      "phone": "Phone number:"
     }
   }
 }

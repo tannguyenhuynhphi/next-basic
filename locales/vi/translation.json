@@ -1,23 +1,157 @@
 {
+  "app": {
+    "notification": {
+      "error": {
+        "message": "Thực hiện không thành công!",
+        "title": "Thông báo"
+      },
+      "success": {
+        "message": "Thực hiện thành công!",
+        "title": "Thông báo"
+      }
+    }
+  },
   "navigation": {
     "avatar": {
-      "logout": "Đăng xuất",
-      "profile": "Hồ sơ"
+      "logout": {
+        "title": "Đăng xuất"
+      },
+      "pagesLis": {
+        "title": "QL bài viết"
+      },
+      "product": {
+        "title": "QL sản phẩm"
+      },
+      "profile": {
+        "title": "Hồ sơ"
+      }
+    },
+    "menu": {
+      "home": {
+        "title": "Trang chủ"
+      },
+      "post": {
+        "title": "Bài viết"
+      },
+      "product": {
+        "title": "Sản Phẩm"
+      }
     }
   },
   "page": {
+    "login": {
+      "ForgotPassword": "Lấy lại mật khẩu",
+      "action": {
+        "submit": "Đăng nhập"
+      },
+      "placeholder": {
+        "password": "Nhập mật khẩu",
+        "username": "Nhập tài khoản"
+      },
+      "remember": "Ghi nhớ",
+      "required": {
+        "password": "Vui lòng nhập mật khẩu !",
+        "username": "Vui lòng nhập tài khoản !"
+      },
+      "title": "Đăng nhập"
+    },
     "post": {
-      "title": "Danh sách"
+      "title": "Danh sách bài đăng"
+    },
+    "product": {
+      "action": {
+        "add": "Thêm mới",
+        "export": "Xuất dữ liệu",
+        "search": "Tìm kiếm",
+        "update": "Cập nhật",
+        "updateUpload": "Cập nhật hình ảnh"
+      },
+      "columns": {
+        "active": {
+          "title": "Trạng thái"
+        },
+        "dateCreated": {
+          "title": "Ngày tạo"
+        },
+        "dateUpdate": {
+          "title": "Ngày cập nhật"
+        },
+        "detail": {
+          "title": "Chi tiết"
+        },
+        "edit": {
+          "title": "Chỉnh sửa"
+        },
+        "imageUrl": {
+          "title": "Hình minh họa"
+        },
+        "name": {
+          "title": "Tên sản phẩm"
+        },
+        "price": {
+          "title": "Giá"
+        },
+        "promotion": {
+          "title": "Giảm giá"
+        },
+        "quantity": {
+          "title": "Số lượng"
+        }
+      },
+      "modal": {
+        "action": {
+          "add": "Thêm mới",
+          "cancel": "Hủy",
+          "update": "Cập nhật",
+          "upload": "Tải lên"
+        },
+        "add": {
+          "title": "Thêm mới"
+        },
+        "detail": {
+          "title": "Chi tiết"
+        },
+        "name": {
+          "title": "Tên sản phẩm"
+        },
+        "placeholder": {
+          "name": "Nhập tên sản phẩm"
+        },
+        "price": {
+          "title": "Giá"
+        },
+        "promotion": {
+          "title": "Khuyến mãi"
+        },
+        "quantity": {
+          "title": "Số lượng"
+        },
+        "required": {
+          "detail": "Vui lòng nhập chi tiết",
+          "name": "Vui lòng nhập tên sản phẩm",
+          "price": "Vui lòng nhập giá",
+          "promotion": "Vui lòng nhập khuyến mãi",
+          "quantity": "Vui lòng nhập số lượng"
+        },
+        "update": {
+          "title": "Cập nhật"
+        }
+      },
+      "title": "Danh sách sản phẩm"
+    },
+    "productList": {
+      "title": "Sản phẩm"
     },
     "profile": {
-      "CMND_CCCD": "CMND_CCCD:",
       "address": "Địa chỉ:",
       "date_of_birth": "Ngày sinh:",
       "email": "Email:",
       "gender": "Giới tính:",
+      "header": {
+        "title": "THÔNG TIN CÁ NHÂN"
+      },
       "name": "Họ Tên:",
-      "phone": "Số điện thoại:",
-      "title": "Thông tin"
+      "phone": "Số điện thoại:"
     }
   }
 }

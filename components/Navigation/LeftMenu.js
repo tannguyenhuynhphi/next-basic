@@ -1,13 +1,14 @@
 import { Menu } from "antd";
 import { useRouter } from "next/router";
-const SubMenu = Menu.SubMenu;
-const MenuItemGroup = Menu.ItemGroup;
+import { useTranslation } from "react-i18next";
+
 function LeftMenu() {
   const router = useRouter();
+  const { t } = useTranslation();
   const menu = [
-    { key: 1, label: "Home" },
-    { key: 2, label: "Post" },
-    { key: 3, label: "Product" },
+    { key: 1, label: t("navigation.menu.home.title")},
+    { key: 2, label: t("navigation.menu.post.title")},
+    { key: 3, label: t("navigation.menu.product.title")},
   ];
   const onClick = (info) => {
     console.log("info", info);

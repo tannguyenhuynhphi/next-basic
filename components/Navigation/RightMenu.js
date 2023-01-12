@@ -10,14 +10,14 @@ function RightMenu() {
     {
       key: "1",
       label: (
-        <a href="/profile">{t("navigation.avatar.profile.title", "Hồ sơ")}</a>
+        <a href="/profile">{t("navigation.avatar.profile.title")}</a>
       ),
     },
     {
       key: "2",
       label: (
         <a href="/page-list">
-          {t("navigation.avatar.pagesLis.title", "Danh sách Post")}
+          {t("navigation.avatar.pagesLis.title")}
         </a>
       ),
     },
@@ -25,7 +25,7 @@ function RightMenu() {
       key: "3",
       label: (
         <a href="/product-manager">
-          {t("navigation.avatar.product.title", "Danh sách Product")}
+          {t("navigation.avatar.product.title")}
         </a>
       ),
     },
@@ -37,7 +37,7 @@ function RightMenu() {
             userService.logout();
           }}
         >
-          {t("navigation.avatar.logout.title", "Đăng xuất")}
+          {t("navigation.avatar.logout.title")}
         </a>
       ),
     },

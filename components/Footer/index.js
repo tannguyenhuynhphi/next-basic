@@ -7,8 +7,16 @@ import {
   PhoneOutlined,
   TwitterOutlined,
 } from "@ant-design/icons";
+import { useEffect, useState } from "react";
+import { userService } from "services";
 
 function FooterLayout() {
+  const [user, setUser] = useState(null);
+  useEffect(() => {
+    const subscription = userService.user.subscribe((x) => setUser(x));
+    return () => subscription.unsubscribe();
+  }, []);
+  if (!user) return null;
   return (
     <div class="footer-distributed">
       <div class="footer-left">

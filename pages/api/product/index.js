@@ -1,4 +1,9 @@
-import { connectToDatabase, countDocuments, getAllDocuments, getMapItemProduct } from "data/database";
+import {
+  connectToDatabase,
+  countDocuments,
+  getAllDocuments,
+  getMapItemProduct,
+} from "data/database";
 import { ProductModel } from "data/model";
 
 import { Schema } from "data/Schema";
@@ -12,6 +17,8 @@ function handler(req, res) {
       return getProducts();
     case "POST":
       return newProducts();
+    case "PUT":
+      return updateProducts();
     default:
       return res.status(405).end(`Method ${req.method} Not Allowed`);
   }
@@ -71,7 +78,7 @@ function handler(req, res) {
     product.setName(name);
     product.setDetail(detail);
     product.setImageUrl(imageUrl);
-    product.setActive(active?active:true);
+    product.setActive(active ? active : true);
     product.setPromotion(promotion);
     product.setPrice(price);
     product.setQuantity(quantity);
@@ -80,5 +87,58 @@ function handler(req, res) {
     await db.collection(Schema.PRODUCT).insertOne(product);
     res.status(201).json({ success: product });
     client.close();
+  }
+  async function updateProducts() {
+    const { id, name, detail, imageUrl, active, price, promotion, quantity } =
+      req.body;
+    if (!id) {
+      res.status(422).json({
+        message:
+          "Invalid input - password should also be at least 7 characters long.",
+      });
+      return;
+    }
+    const client = await connectToDatabase();
+    const db = client.db();
+    const productCollection = await db.collection(Schema.PRODUCT);
+    if (!productCollection) {
+      res.status(422).json({ message: "productCollection exists!" });
+      client.close();
+      return;
+    }
+    var newValuesSet = {};
+    if (name) {
+      newValuesSet.name = name;
+    }
+    if (detail) {
+      newValuesSet.detail = detail;
+    }
+    if (imageUrl) {
+      newValuesSet.imageUrl = imageUrl;
+    }
+    if (active) {
+      newValuesSet.active = active;
+    }
+    if (price) {
+      newValuesSet.price = price;
+    }
+    if (promotion) {
+      newValuesSet.promotion = promotion;
+    }
+    if (quantity) {
+      newValuesSet.quantity = quantity;
+    }
+    newValuesSet.dateUpdate = new Date().valueOf();
+    var newValues = {
+      $set: newValuesSet,
+    };
+    try {
+      var idObjectId = { _id: ObjectId(id) };
+      const result = await productCollection.updateOne(idObjectId, newValues);
+      res.status(200).json({ success: result });
+      client.close();
+    } catch (e) {
+      res.status(500).json({ message: "Getting event failed." });
+    }
   }
 }

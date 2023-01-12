@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { InboxOutlined } from "@ant-design/icons";
-import { message, Upload } from "antd";
+import { Upload } from "antd";
 import { uploadService } from "services/upload.service";
+import AppContext from "store/app-context";
 const { Dragger } = Upload;
 
 const UploadDrop = () => {
   const [dataFile, setDataFile] = useState(null);
+  const AppContextX = useContext(AppContext);
   const props = {
     name: "file",
     multiple: false,
@@ -20,10 +22,18 @@ const UploadDrop = () => {
         formdata.append("file", info.fileList[0].originFileObj);
         uploadService.upload(formdata).then((x) => {
           setDataFile(x.response);
+          AppContextX.showNotification({
+            title: t("app.notification.success.title"),
+            message: t("app.notification.success.message"),
+            status: "success",
+          });
         });
-        message.success(`${info.file.name} file uploaded successfully.`);
       } else if (status === "error") {
-        message.error(`${info.file.name} file upload failed.`);
+        AppContextX.showNotification({
+          title: t("app.notification.error.title"),
+          message: t("app.notification.error.message"),
+          status: "error",
+        });
       }
     },
     onDrop(e) {
@@ -33,7 +43,11 @@ const UploadDrop = () => {
   console.log("dataFile", dataFile);
   return (
     <Dragger {...props}>
-      <input style={{display: "none"}} id="nameImages" value={dataFile && dataFile[0].filename}/>
+      <input
+        style={{ display: "none" }}
+        id="nameImages"
+        value={dataFile && dataFile[0].filename}
+      />
       <p className="ant-upload-drag-icon">
         <InboxOutlined />
       </p>

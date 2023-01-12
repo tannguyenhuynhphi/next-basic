@@ -5,7 +5,9 @@ import classes from "./Login.module.scss";
 import { useRouter } from "next/router";
 import { userService } from "services";
 import AppContext from "store/app-context";
+import { useTranslation } from "react-i18next";
 const LoginComponents = () => {
+  const { t } = useTranslation();
   const AppContextX = useContext(AppContext);
   const router = useRouter();
 
@@ -26,8 +28,8 @@ const LoginComponents = () => {
       })
       .catch((error) => {
         AppContextX.showNotification({
-          title: "Error!",
-          message: error,
+          title: t("app.notification.error.title"),
+          message: t("app.notification.error.message"),
           status: "error",
         });
       });
@@ -35,7 +37,7 @@ const LoginComponents = () => {
   return (
     <Card
       className={classes.main}
-      title="LOGIN"
+      title={t("page.login.title")}
       // extra={<a href="#">More</a>}
       style={{ width: 400 }}
     >
@@ -52,13 +54,13 @@ const LoginComponents = () => {
           rules={[
             {
               required: true,
-              message: "Please input your Username!",
+              message: t("page.login.required.username"),
             },
           ]}
         >
           <Input
             prefix={<UserOutlined className="site-form-item-icon" />}
-            placeholder="Username"
+            placeholder={t("page.login.placeholder.username")}
           />
         </Form.Item>
         <Form.Item
@@ -66,23 +68,23 @@ const LoginComponents = () => {
           rules={[
             {
               required: true,
-              message: "Please input your Password!",
+              // message: t("page.login.required.username"), "Please input your Password!"
+              message: t("page.login.required.password"),
             },
           ]}
         >
           <Input
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
-            placeholder="Password"
+            placeholder={t("page.login.placeholder.password")}
           />
         </Form.Item>
         <Form.Item>
           <Form.Item name="remember" valuePropName="checked" noStyle>
-            <Checkbox>Remember me</Checkbox>
+            <Checkbox>{t("page.login.remember")}</Checkbox>
           </Form.Item>
-
           <a className="login-form-forgot" href="">
-            Forgot password
+            {t("page.login.ForgotPassword")}
           </a>
         </Form.Item>
         <Form.Item>
@@ -91,7 +93,7 @@ const LoginComponents = () => {
             htmlType="submit"
             className="login-form-button"
           >
-            Log in
+            {t("page.login.action.submit")}
           </Button>
           {/* Or <a href="">register now!</a> */}
         </Form.Item>

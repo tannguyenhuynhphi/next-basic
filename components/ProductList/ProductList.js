@@ -5,9 +5,11 @@ import classes from "./ProductList.module.scss";
 import { useRouter } from "next/router";
 import { ShoppingCartOutlined } from "@ant-design/icons";
 import { productService } from "services/product.service";
+import { useTranslation } from "react-i18next";
 const { Text, Title } = Typography;
 
 const ProductList = (props) => {
+  const { t } = useTranslation();
   const [data, setData] = useState(null);
   const [total, setTotal] = useState(null);
   const [page, setPage] = useState(1);
@@ -42,7 +44,7 @@ const ProductList = (props) => {
   };
   return (
     <>
-      <Card style={{ borderRadius: "0px" }} title="Product">
+      <Card style={{ borderRadius: "0px" }} title={t("page.productList.title")}>
         {data &&
           data.map((item) => (
             <Card.Grid style={gridStyle}>

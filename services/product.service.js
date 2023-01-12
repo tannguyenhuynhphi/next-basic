@@ -17,6 +17,7 @@ export const productService = {
   addProduct,
   getProduct,
   getProductId,
+  uploadProduct,
 };
 function getProduct(limit, page, filter, sorter) {
   var baseUrls = baseUrl + "?limit=" + limit + "&page=" + page;
@@ -40,18 +41,42 @@ function getProduct(limit, page, filter, sorter) {
   return fetchWrapper.get(baseUrls);
 }
 function getProductId(id) {
-  var baseUrls = baseUrl +"/"+ id
+  var baseUrls = baseUrl + "/" + id;
   return fetchWrapper.get(baseUrls);
 }
-function addProduct(name, detail, quantity, imageUrl, promotion,price) {
-const baseUrls = baseUrl;
-const body = {
-  name: name,
-  detail: detail,
-  quantity: quantity,
-  imageUrl: imageUrl,
-  promotion: promotion,
-  price: price,
-};
-return fetchWrapper.post(baseUrls,body);
+function addProduct(name, detail, quantity, imageUrl, promotion, price) {
+  const baseUrls = baseUrl;
+  const body = {
+    name: name,
+    detail: detail,
+    quantity: quantity,
+    imageUrl: imageUrl,
+    promotion: promotion,
+    price: price,
+  };
+  return fetchWrapper.post(baseUrls, body);
+}
+function uploadProduct(id, name, detail, quantity, promotion, price, imageUrl) {
+  const baseUrls = baseUrl;
+  const body = {};
+  body.id = id;
+  if (name) {
+    body.name = name;
+  }
+  if (detail) {
+    body.detail = detail;
+  }
+  if (quantity) {
+    body.quantity = quantity;
+  }
+  if (imageUrl) {
+    body.imageUrl = imageUrl;
+  }
+  if (promotion) {
+    body.promotion = promotion;
+  }
+  if (price) {
+    body.price = price;
+  }
+  return fetchWrapper.put(baseUrls, body);
 }
