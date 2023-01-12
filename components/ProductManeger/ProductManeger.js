@@ -12,6 +12,7 @@ import { DatePicker } from "antd";
 import { useTranslation } from "react-i18next";
 import { productService } from "services/product.service";
 import AppContext from "store/app-context";
+import ExportCSV from "components/Common/ExportCsv/ExportCSV";
 const ProTable = lazy(() => import("@ant-design/pro-table"));
 const ProductDialog = lazy(() => import("./ProductDialog"));
 const UploadEdit = lazy(() => import("../Common/UploadCut/UploadEdit"));
@@ -30,7 +31,18 @@ function ProductManeger() {
   const [filter, setFilter] = useState({});
   const inputRefTitle = useRef(null);
   //RangePicker
-
+  const [fileHeaders] = useState([
+    { label: "First Name", key: "name" },
+    { label: "Detail", key: "detail" }, 
+    { label: "ImageUrl", key: "imageUrl" },
+    { label: "Price", key: "price" },
+    { label: "Promotion", key: "promotion" },
+    { label: "Quantity", key: "quantity" },
+    { label: "DateCreated", key: "dateCreated" },
+    { label: "DateUpdate", key: "dateUpdate" },
+    { label: "Active", key: "active" },
+  ]);
+  const filename = "Product_11" + ".csv"
   const { RangePicker } = DatePicker;
   const state = { startDate: new Date(), endDate: "" };
   const loadData = (query) => {
@@ -255,9 +267,16 @@ function ProductManeger() {
         >
           {t("page.product.action.search")}
         </Button>,
-        <Button icon={<ExportOutlined />}>
-          {t("page.product.action.export")}
-        </Button>,
+        <ExportCSV
+          filename={filename}
+          fileHeaders={fileHeaders}
+          data={data}
+          edit={
+            <Button icon={<ExportOutlined />}>
+              {t("page.product.action.export")}
+            </Button>
+          }
+        />,
         <ProductDialog
           edit={<Button>{t("page.product.action.add")}</Button>}
           refresh={() => setRefresh(2)}

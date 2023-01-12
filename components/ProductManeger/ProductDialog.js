@@ -102,10 +102,10 @@ function ProductDialog(props) {
       <Form
         onFinish={onFinish}
         labelCol={{
-          span: 4,
+          span: 6,
         }}
         wrapperCol={{
-          span: 24,
+          span: 22 ,
         }}
         layout="horizontal"
         form={form}
